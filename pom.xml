@@ -14,6 +14,7 @@
 		<org.slf4j-version>1.7.23</org.slf4j-version>
 		<project.lib.path>${project.basedir}/src/main/webapp/WEB-INF/lib</project.lib.path>
 		<jackson.databind-version>2.9.6</jackson.databind-version>
+		<hibernate.version>5.3.6.Final</hibernate.version>
 	</properties>
 	<dependencies>
 		<!-- Spring -->
@@ -224,27 +225,56 @@
 		    <version>0.5</version>
 		</dependency>
 		
-		<!-- Servlet -->
-		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<!-- hibernate -->
+		<!-- jpa, mybatis를 함께 사용하기 위한 설정   -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
 		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>javax.servlet-api</artifactId>
-		    <version>4.0.1</version>
-		    <scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-orm</artifactId>
+		    <version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate.version}</version>
+		    <exclusions>
+		    	<exclusion>
+		    		<artifactId>jboss-logging</artifactId>
+		    		<groupId>org.jobss.logging</groupId>
+		    	</exclusion>
+		    </exclusions>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.jboss.logging/jboss-logging -->
+		<dependency>
+		    <groupId>org.jboss.logging</groupId>
+		    <artifactId>jboss-logging</artifactId>
+		    <version>3.3.1.Final</version>
+		</dependency>	
+		
+		<!-- Servlet -->
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>javax.servlet</groupId> -->
+<!-- 		    <artifactId>javax.servlet-api</artifactId> -->
+<!-- 		    <version>4.0.1</version> -->
+<!-- 		    <scope>provided</scope> -->
+<!-- 		</dependency> -->
+
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.servlet.jsp</groupId> -->
+<!-- 			<artifactId>jsp-api</artifactId> -->
+<!-- 			<version>2.1</version> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
+		
+<!-- 		<dependency> -->
+<!-- 			<groupId>javax.servlet</groupId> -->
+<!-- 			<artifactId>jstl</artifactId> -->
+<!-- 			<version>1.2</version> -->
+<!-- 		</dependency> -->
 		
 	</dependencies>
     <build>
