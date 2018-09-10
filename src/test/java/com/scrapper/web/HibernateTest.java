@@ -1,5 +1,7 @@
 package com.scrapper.web;
 
+import javax.annotation.Resource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -11,6 +13,8 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
+import com.scrapper.web.orm.book.BookDAO;
 
 
 
@@ -27,14 +31,16 @@ public class HibernateTest {
 	@Autowired
 	private WebApplicationContext wac;
 	
-	// MVC ÆÐÅÏÀÇ ¾ÛÀ» Å×½ºÆ®ÇÏ´Â mock-up °´Ã¼
+	@Resource(name="bookDAOImpl") private BookDAO bookDAO;
+	
+	// MVC ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½Ï´ï¿½ mock-up ï¿½ï¿½Ã¼
 	private MockMvc mock;
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(HibernateTest.class);
 	
 	@Test
 	public void getBookList(){
-		
+		bookDAO.selectBookListAll();
 	}
 	
 }
