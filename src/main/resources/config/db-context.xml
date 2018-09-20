@@ -13,7 +13,7 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<context:component-scan base-package="com.spring.scrapper"></context:component-scan>
+<!-- 	<context:component-scan base-package="com.spring.scrapper"></context:component-scan> -->
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
@@ -33,6 +33,25 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 
+<!-- 	<bean id="dataSourceJPA" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!-- 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" /> -->
+<!-- 		<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/scrapper?useSSL=false&amp;serverTimezone=UTC" /> -->
+<!-- 		<property name="username" value="scrapper" /> -->
+<!-- 		<property name="password" value="1111" />	 -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="jpaSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"> -->
+<!-- 		<property name="dataSource" ref="dataSourceJPA"/> -->
+<!-- 		<property name="packagesToScan" value="com.scrapper.web"/> -->
+<!-- 		<property name="hibernateProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop> -->
+<!-- 				<prop key="hibernate.format_sql">true</prop> -->
+<!-- 				<prop key="hibernate.show_sql">true</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+
 	<bean id="dataSourceJPA" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 		<property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/scrapper?useSSL=false&amp;serverTimezone=UTC" />
@@ -41,20 +60,21 @@
 	</bean>
 	
 	<bean id="jpaSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSourceJPA"/>
+<!-- 		<property name="dataSource" ref="dataSourceJPA"/> -->
 		<property name="packagesToScan" value="com.scrapper.web"/>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.show_sql">true</prop>
-			</props>
-		</property>
+		<property name="configLocation" value="classpath:/config/hibernate.cfg.xml"></property>
+<!-- 		<property name="hibernateProperties"> -->
+<!-- 			<props> -->
+<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop> -->
+<!-- 				<prop key="hibernate.format_sql">true</prop> -->
+<!-- 				<prop key="hibernate.show_sql">true</prop> -->
+<!-- 			</props> -->
+<!-- 		</property> -->
 	</bean>
 	
 	<bean id="jpaTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="jpaSessionFactory"></property>
 	</bean>
 	
-	<tx:annotation-driven transaction-manager="jpaSessionFactory"/>
+	<tx:annotation-driven transaction-manager="jpaTransactionManager"/>
 </beans>

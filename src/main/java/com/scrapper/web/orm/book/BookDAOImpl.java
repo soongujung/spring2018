@@ -13,13 +13,15 @@ import com.scrapper.web.orm.book.vo.BookVO;
 @Repository
 public class BookDAOImpl implements BookDAO{
 
-	// ÀÇ½É°¡´Â ºÎºÐ
+	// ï¿½Ç½É°ï¿½ï¿½ï¿½ ï¿½Îºï¿½
 	@Resource(name="jpaSessionFactory")
 	private SessionFactory sessionFactory;
 	
 	@Override
 	public List<BookVO> selectBookListAll() {
-		String sql = "SELECT * FROM Book";
+//		String sql = "SELECT * FROM Book";
+		String sql = "SELECT * FROM PERF_H_CPU WHERE REG_DT='20180918'";
+		
 		NativeQuery<BookVO> query = sessionFactory.getCurrentSession().createNativeQuery(sql);
 		List<BookVO> result = query.list();
 		return result;
